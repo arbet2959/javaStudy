@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+@SuppressWarnings("serial")
 public class T01_CardLayout1 extends JFrame{
 	private JButton btn1, btn2 ,btn3 ,btn4;
 	private JPanel pnCenter, pnSouth, pn1, pn2, pn3, pn4;
