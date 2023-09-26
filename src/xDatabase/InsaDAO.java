@@ -280,7 +280,6 @@ public class InsaDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, column);
 			pstmt.setString(1, "%"+condition+"%");
 			rs = pstmt.executeQuery();
 			

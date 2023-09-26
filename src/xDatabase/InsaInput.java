@@ -33,27 +33,6 @@ public class InsaInput extends JFrame {
 	private InsaService service;
 	private int res=0;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InsaInput frame = new InsaInput();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
-		
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public InsaInput() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
