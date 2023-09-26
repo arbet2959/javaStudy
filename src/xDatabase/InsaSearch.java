@@ -29,25 +29,10 @@ public class InsaSearch extends JFrame {
 	private InsaVO vo;
 	private InsaDAO dao;
 	private InsaService service;
-	private int res=0;
 	
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					InsaSearch frame = new InsaSearch();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//		
-//		
-//	}
+	int res=0;
+	
+
 
 	/**
 	 * Create the frame.
@@ -196,73 +181,67 @@ public class InsaSearch extends JFrame {
 		
 		
 		//-----------------------------------------------------------------------------------------------------------------
+		//회원정보수정버튼
 		
-//		btnInput.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				String name = txtName.getText();
-//				String age = txtAge.getText();
-//				String gender;
-//				String ipsail = cbYY.getSelectedItem()+"-"+cbMM.getSelectedItem()+"-"+cbDD.getSelectedItem();
-//				boolean checkName;
-//				btnReset.doClick();
-//				if(!Pattern.matches("[가-힣]+", name)) {
-//					JOptionPane.showMessageDialog(null, "이름을 다시 입력해주세요");
-//					txtName.requestFocus();
-//				}else if(!Pattern.matches("[0-9]+", age)) {
-//					JOptionPane.showMessageDialog(null, "숫자를 다시 입력해주세요");
-//					txtAge.requestFocus();
-//				}else if(Pattern.matches("[가-힣]+", name) &&
-//					Pattern.matches("[0-9]+", age)) {
-//					dao = InsaDAO.getInstance();
-//					vo = dao.getNameSearch(name);
-//					if(vo.getName()!=null) {
-//						JOptionPane.showMessageDialog(null, "이미 가입된 회원입니다.");
-//						txtName.requestFocus();
-//					}else {
-//						//정상입력
-//						if(rbMale.isSelected()) gender ="남자";
-//						else gender = "여자";
-//						vo.setName(name);
-//						vo.setAge(Integer.parseInt(age));
-//						vo.setGender(gender);
-//						vo.setIpsail(ipsail);
-//						
-//						res = dao.setInsaInput(vo);
-//						
-//						if(res ==0)	JOptionPane.showMessageDialog(null, "회원가입실패");
-//						if(res ==1)	{
-//							JOptionPane.showMessageDialog(null, "회원가입성공!");
-//							btnReset.doClick();
-//							dispose();
-//						}
-//						
-//							
-//						
-//						//정상자료
-//					}
-//				}
-//					
-//				
-//			}
-//		});
-//		
-//		btnSearch.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				txtName.setText("");
-//				txtAge.setText("");
-//				rbMale.setSelected(true);
-//				service = new InsaService();
-//				 
-//				vo= service.getDefaultDate(); //오늘날짜얻기
-//				cbYY.setSelectedItem(vo.getStrYY());
-//				cbMM.setSelectedItem(vo.getStrMM());
-//				cbDD.setSelectedItem(vo.getStrDD());
-//				 
-//				 txtName.requestFocus();
-//				
-//			}
-//		});
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = txtName.getText();
+				String age = txtAge.getText();
+				String gender;
+				String ipsail = cbYY.getSelectedItem()+"-"+cbMM.getSelectedItem()+"-"+cbDD.getSelectedItem();
+				InsaVO vo = new InsaVO();
+				
+
+				if(!Pattern.matches("[0-9]+", age)) {
+					JOptionPane.showMessageDialog(null, "나이를 다시 입력해주세요");
+					txtAge.requestFocus();
+				}else if(Pattern.matches("[0-9]+", age)) {
+					dao = InsaDAO.getInstance();
+					vo = dao.getNameSearch(name);
+						//정상입력
+						if(rbMale.isSelected()) gender ="남자";
+						else gender = "여자";
+						vo.setName(name);
+						vo.setAge(Integer.parseInt(age));
+						vo.setGender(gender);
+						vo.setIpsail(ipsail);
+						
+						res = dao.setInsaUpdate(vo);
+						
+						if(res ==0)	JOptionPane.showMessageDialog(null, "수정실패");
+						if(res ==1)	{
+							JOptionPane.showMessageDialog(null, "수정성공!");	
+							dispose();
+						}
+					}
+			}
 		
+		});
+		
+		//삭제버튼
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = txtName.getText();
+
+				int ans = JOptionPane.showConfirmDialog(null, name + "회원을 삭제하시겠습니까?","회원삭제",JOptionPane.YES_NO_OPTION);
+				if(ans ==0) {
+					dao = InsaDAO.getInstance();
+					res = dao.setInsaDelete(name);
+					if(res == 1) {
+						JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+						dispose();
+					}
+					if(res == 0) {
+						JOptionPane.showMessageDialog(null, "회원삭제 실패했습니다");
+					}
+				}
+				if(ans==1) {
+					JOptionPane.showMessageDialog(null, "취소했습니다.");
+				}
+				
+			}
+		});
+
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

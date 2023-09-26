@@ -113,6 +113,7 @@ public class InsaMain extends JFrame {
 		
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new InsaList();
 			}
 		});
 		

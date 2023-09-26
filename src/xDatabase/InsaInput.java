@@ -16,6 +16,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
@@ -253,6 +255,15 @@ public class InsaInput extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
+		});
+	
+		txtName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) txtAge.requestFocus();
+				
+			}
+		
 		});
 	}
 	
